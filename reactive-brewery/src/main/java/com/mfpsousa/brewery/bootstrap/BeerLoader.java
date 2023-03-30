@@ -1,8 +1,8 @@
 package com.mfpsousa.brewery.bootstrap;
 
 import com.mfpsousa.brewery.domain.Beer;
-import com.mfpsousa.brewery.repositories.BeerRepository;
 import com.mfpsousa.brewery.web.model.BeerStyleEnum;
+import com.mfpsousa.brewery.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
@@ -10,8 +10,12 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 import java.util.Random;
 
+/**
+ * Created by jt on 3/7/21.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Component
@@ -57,9 +61,9 @@ public class BeerLoader implements CommandLineRunner {
     }
 
     private synchronized void loadBeerObjects() {
-        log.debug("Loading initial data. Count is: {}", beerRepository.count() );
+        log.debug("Loading initial data. Count is: {}", beerRepository.count().block() );
 
-        if (beerRepository.count() == 0) {
+        if (beerRepository.count().block() == 0) {
 
             Random random = new Random();
 
@@ -69,7 +73,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_1_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Galaxy Cat")
@@ -77,7 +83,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_2_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("No Hammers On The Bar")
@@ -85,7 +93,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_3_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Blessed")
@@ -93,7 +103,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_4_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Adjunct Trail")
@@ -101,7 +113,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_5_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Very GGGreenn")
@@ -109,7 +123,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_6_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Double Barrel Hunahpu's")
@@ -117,7 +133,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_7_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Very Hazy")
@@ -125,7 +143,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_8_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("SR-71")
@@ -133,7 +153,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_9_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Pliny the Younger")
@@ -141,7 +163,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_10_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Blessed")
@@ -149,7 +173,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_11_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("King Krush")
@@ -157,7 +183,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_12_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("PBS Porter")
@@ -165,7 +193,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_13_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Pinball Porter")
@@ -173,7 +203,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_14_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Golden Budda")
@@ -181,7 +213,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_15_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Grand Central Red")
@@ -189,7 +223,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_16_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Pac-Man")
@@ -197,7 +233,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_17_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Ro Sham Bo")
@@ -205,7 +243,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_18_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Summer Wheatly")
@@ -213,7 +253,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_19_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Java Jill")
@@ -221,7 +263,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_20_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Bike Trail Pale")
@@ -229,7 +273,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_21_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("N.Z.P")
@@ -237,7 +283,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_22_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Stawberry Blond")
@@ -245,7 +293,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_23_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Loco")
@@ -253,7 +303,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_24_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Spocktoberfest")
@@ -261,7 +313,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_25_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Beach Blond Ale")
@@ -269,7 +323,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_26_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Bimini Twist IPA")
@@ -277,7 +333,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_27_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Rod Bender Red Ale")
@@ -285,7 +343,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_28_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("Floating Dock")
@@ -293,7 +353,9 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_29_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
             beerRepository.save(Beer.builder()
                     .beerName("El Hefe")
@@ -301,9 +363,11 @@ public class BeerLoader implements CommandLineRunner {
                     .upc(BEER_30_UPC)
                     .price(new BigDecimal(BigInteger.valueOf(random.nextInt(10000)), 2))
                     .quantityOnHand(random.nextInt(5000))
-                    .build());
+                    .createdDate(LocalDateTime.now())
+                    .lastModifiedDate(LocalDateTime.now())
+                    .build()).block();
 
-            log.debug("Beer Records loaded: {}", beerRepository.count());
+            log.debug("Beer Records loaded: {}", beerRepository.count().block());
         }
     }
 }

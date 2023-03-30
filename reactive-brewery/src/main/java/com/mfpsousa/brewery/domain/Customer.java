@@ -7,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
+/**
+ * Created by jt on 2019-05-25.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

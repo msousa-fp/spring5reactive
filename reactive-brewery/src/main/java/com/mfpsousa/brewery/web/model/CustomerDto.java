@@ -9,6 +9,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.UUID;
 
+/**
+ * Created by jt on 2019-04-21.
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
