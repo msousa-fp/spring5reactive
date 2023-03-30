@@ -1,11 +1,12 @@
 package com.mfpsousa.brewery.services;
 
 import com.mfpsousa.brewery.domain.Beer;
+import com.mfpsousa.brewery.repositories.BeerRepository;
+import com.mfpsousa.brewery.web.controller.NotFoundException;
 import com.mfpsousa.brewery.web.mappers.BeerMapper;
 import com.mfpsousa.brewery.web.model.BeerDto;
 import com.mfpsousa.brewery.web.model.BeerPagedList;
 import com.mfpsousa.brewery.web.model.BeerStyleEnum;
-import com.mfpsousa.brewery.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,9 +23,6 @@ import static org.springframework.data.relational.core.query.Criteria.where;
 import static org.springframework.data.relational.core.query.Query.empty;
 import static org.springframework.data.relational.core.query.Query.query;
 
-/**
- * Created by jt on 2019-04-20.
- */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -56,12 +54,10 @@ public class BeerServiceImpl implements BeerService {
                 .all()
                 .map(beerMapper::beerToBeerDto)
                 .collect(Collectors.toList())
-                .map(beers -> {
-                    return new BeerPagedList(beers, PageRequest.of(
-                            pageRequest.getPageNumber(),
-                            pageRequest.getPageSize()),
-                            beers.size());
-                });
+                .map(beers -> new BeerPagedList(beers, PageRequest.of(
+                        pageRequest.getPageNumber(),
+                        pageRequest.getPageSize()),
+                        beers.size()));
     }
 
     @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
@@ -77,6 +73,13 @@ public class BeerServiceImpl implements BeerService {
     @Override
     public Mono<BeerDto> saveNewBeer(BeerDto beerDto) {
         return beerRepository.save(beerMapper.beerDtoToBeer(beerDto)).map(beerMapper::beerToBeerDto);
+    }
+
+    @Override
+    public Mono<BeerDto> saveNewBeerMono(Mono<BeerDto> beerDto) {
+        return beerDto.map(beerMapper::beerDtoToBeer)
+                .flatMap(beerRepository::save)
+                .map(beerMapper::beerToBeerDto);
     }
 
     @Override
@@ -110,16 +113,12 @@ public class BeerServiceImpl implements BeerService {
         beerRepository.deleteById(beerId).subscribe();
     }
 
-
-
-
-
+    @Override
+    public Mono<Void> reactiveDeleteById(Integer beerId) {
+        return beerRepository
+                .findById(beerId)
+                .switchIfEmpty(Mono.error(NotFoundException::new))
+                .map(Beer::getId)
+                .flatMap(beerRepository::deleteById);
+    }
 }
-
-
-
-
-
-
-
-
